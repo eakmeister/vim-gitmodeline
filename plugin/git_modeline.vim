@@ -66,7 +66,8 @@ fun! <SID>DoSetModeline(line) abort
 endfun
 
 fun! <SID>GitConfigModeline() abort
-    let git_config_modeline = system("git config --get vim.modeline")
+    let command = "cd " . expand('%:p:h') . " && git config --get vim.modeline"
+    let git_config_modeline = system(command)
     if strlen(git_config_modeline)
         call <SID>DoSetModeline(git_config_modeline)
     endif
